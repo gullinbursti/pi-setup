@@ -1,0 +1,27 @@
+
+#-- opts
+set autoindent
+set backup
+set backupdir "/usr/local/var/nano/backups"
+set boldtext
+set constantshow
+set historylog
+set linenumbers
+set nowrap
+set positionlog
+set regexp
+set smooth
+set tabsize 4
+unset tabstospaces
+
+#-- colors
+set titlecolor brightyellow,magenta
+set statuscolor brightwhite
+set errorcolor brightwhite,red
+set selectedcolor brightwhite,cyan
+set numbercolor brightblack
+set keycolor brightyellow
+set functioncolor green
+
+#-- syntax
+include "/usr/share/nano/*.nanorc"

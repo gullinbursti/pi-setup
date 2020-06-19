@@ -2,19 +2,18 @@
 printf " -=>> %s/.bashrc.pi\n" $HOME
 
 
-
 #-- personalize
 HISTTIMEFORMAT='%F %T '
 
 
-cpu_freq {
+cpu_freq() {
 	local freq_hz=$(sudo cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq)
 	#local freq_ghz=$(echo "$freq_hz/1000000" | bc -l | awk '{print substr($0, 1, 7)≈}')
 #	printf "%sGHz // %sHz\n" $freq_ghz $freq_hz
 	printf "%sHz\n" $freq_hz
 }
 
-cpu_temp {
+cpu_temp() {
 	local temp_cel=$(echo "`cat /sys/devices/virtual/thermal/thermal_zone0/temp`/1000" | bc -l | awk '{print substr($0, 1, 4)}')
 	local temp_feh=$(echo "(($temp_cel*9)/5)+32" | bc -l | awk '{print substr($0, 1, 6)}')
 	#awk '{printf "%.02f°F\n", (($0 * 0.001) * (9 / 5)) + 32}' <<< "`cat /sys/class/thermal/thermal_zone0/temp`"  |   |
@@ -33,11 +32,11 @@ man() {
 
 
 export EDITOR=nano
-export VISUAL=nano
-export LESS='-XR'
-export PAGER=less
-
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export LESS='-XR'
+export LESSOPEN="| /usr/local/bin/source-highlight-esc.sh %s"
+export PAGER=less
+export VISUAL=nano
 
 
 alias apt='sudo apt'
@@ -74,4 +73,6 @@ alias cls="echo $'\ec'"
 
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+shopt -s histappend
 shopt -s globstar

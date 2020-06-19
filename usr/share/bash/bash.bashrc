@@ -1,6 +1,4 @@
 
-#-- appended to /etc/bash.bashrc
-
 # enable bash completion in interactive shells
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -11,5 +9,6 @@ if ! shopt -oq posix; then
 fi
 
 
+#-- enable color for grep & ls
 export GREP_OPTS='--color=auto'
 export LS_OPTS='--color=auto'

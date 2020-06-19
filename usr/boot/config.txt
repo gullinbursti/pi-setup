@@ -1,0 +1,199 @@
+
+
+
+#-- pi-setup
+# http://rpf.io/configtxt
+
+
+
+#-- misc global
+[all]
+total_mem=1024
+disable_splash=1
+avoid_warnings=1
+dtparam=audio=on
+disable_audio_dither=1
+pwm_sample_bits=14
+max_usb_current=1
+[all]
+
+
+
+#-- defaults
+[pi1]
+arm_freq=
+gpu_freq=
+core_freq=
+sdram_freq=
+over_voltage_sdram=
+[all]
+
+[pi2]
+arm_freq=
+gpu_freq=
+core_freq=
+sdram_freq=
+over_voltage_sdram=
+[all]
+
+[pi3]
+arm_freq=1200
+gpu_freq=400
+core_freq=400
+sdram_freq=450
+over_voltage_sdram=0
+[all]
+
+
+#-- optionals
+# disable_overscan=1
+# hdmi_safe=1
+# hdmi_force_hotplug=1
+# config_hdmi_boost=4
+# hdmi_drive=2
+
+
+
+#-- device opts
+[pi1]
+arm_freq_min=
+gpu_freq_min=
+core_freq_min=
+sdram_freq_min=
+[all]
+
+[p12]
+arm_freq_min=
+gpu_freq_min=
+core_freq_min=
+sdram_freq_min=
+[all]
+
+[pi3]
+arm_freq_min=333
+gpu_freq_min=200
+core_freq_min=200
+sdram_freq_min=200
+over_voltage_min=-2
+[all]
+
+
+#-- global overclocking
+
+[all]
+boot_delay=3
+initial_turbo=69
+force_turbo=0
+temp_limit=78
+sdram_schmoo=0x02000020
+dtparam=sd_overclock=66
+[all]
+
+
+#-- device overclocking
+[pi1]
+arm_freq_min=
+gpu_freq_min=
+core_freq_min=
+sdram_freq_min=
+[all]
+
+
+[pi2]
+arm_freq_min=
+gpu_freq_min=
+core_freq_min=
+sdram_freq_min=
+[all]
+
+
+[pi3]
+[all]
+
+
+
+#-- raspi-config overclocks
+
+[pi1]
+[all]
+
+
+[pi2]
+[all]
+
+
+[pi3]
+[all]
+
+
+
+#-- active overlock 
+[pi1]
+[all]
+
+[p12]
+[all]
+
+
+[pi3] #-- stable
+arm_freq=1300
+gpu_freq=500
+core_freq=400
+sdram_freq=500
+over_voltage_sdram=0
+over_voltage_sdram=2
+over_voltage=2
+[all]
+
+
+
+
+
+
+
+
+[none]
+#-- custom overclock choices
+
+[pi1]
+[all]
+
+
+[pi2]
+[all]
+
+
+[pi3]
+#-- @ 1.35GHz
+#arm_freq=1350
+#gpu_freq=500
+#core_freq=500
+#sdram_freq=500
+#over_voltage=3
+#over_voltage_sdram=2
+
+#-- @ 1.4GHz
+#arm_freq=1400
+#gpu_freq=500
+#core_freq=500
+#sdram_freq=500
+#over_voltage=4
+
+#-- @ 1.5GHz
+#arm_freq=1500
+#sdram_freq=550
+#core_freq=500
+#gpu_freq=500
+#h264_freq=600
+#over_voltage_min=-2
+#over_voltage=3
+
+#-- @ 1.6GHz
+#arm_freq=1600
+#gpu_freq=500
+#core_freq=500
+#sdram_freq=500
+#over_voltage=6
+#sdram_over_voltage=2
+[all]
+
