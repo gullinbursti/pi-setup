@@ -29,11 +29,11 @@ nano_fs() {
 
 bash_home() {
 	local profile_file=/home/pi/.profile
-	local rc_file=/home/pi/.bashrc.pi
+	local rc_file=/home/pi/.bashrc_pi
 
 	#-- copy bash add'l
 	if [ -f "$rc_file" ]; then cp -p $rc_file $rc_file.bak ; fi
-	cp -p ./home/pi/.bashrc.pi $rc_file
+	cp -p ./home/pi/.bashrc_pi $rc_file
 
 	#-- backup & append .profile
 	if [ -f "$profile_file" ]; then cp -p $profile_file $profile_file.bak ; fi

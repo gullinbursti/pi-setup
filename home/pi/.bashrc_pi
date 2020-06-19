@@ -1,5 +1,5 @@
-#printf ".bashrc.pi -> dirname : [%s] basename [%s]\n" "`dirname $0`" "`basename $0`"
-printf " -=>> %s/.bashrc.pi\n" $HOME
+#printf ".bashrc_pi -> dirname : [%s] basename [%s]\n" "`dirname $0`" "`basename $0`"
+printf " -=>> %s/.bashrc_pi\n" $HOME
 
 
 #-- personalize
