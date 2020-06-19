@@ -28,7 +28,7 @@ mnt_stubs() {
 		cd $mnt_root
 		sudo ln -s ./usb0 usb
 	fi
-	
+
 	if [ ! -s $mnt_root/usb ]; then
 		cd $mnt_root/../
 		sudo ln -s ./pi/usb
