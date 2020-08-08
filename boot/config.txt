@@ -1,8 +1,17 @@
 
-
-
 #-- pi-setup
 # http://rpf.io/configtxt
+
+
+
+
+
+#-- optionals
+# disable_overscan=1
+# hdmi_safe=1
+# hdmi_force_hotplug=1
+# config_hdmi_boost=4
+# hdmi_drive=2
 
 
 
@@ -21,19 +30,21 @@ max_usb_current=1
 
 #-- defaults
 [pi1]
-arm_freq=
-gpu_freq=
-core_freq=
-sdram_freq=
-over_voltage_sdram=
+arm_freq=700
+gpu_freq=250
+core_freq=500
+sdram_freq=500
+over_voltage_sdram=0
+over_voltage=0
 [all]
 
 [pi2]
-arm_freq=
-gpu_freq=
-core_freq=
-sdram_freq=
-over_voltage_sdram=
+arm_freq=900
+gpu_freq=250
+core_freq=250
+sdram_freq=450
+over_voltage_sdram=0
+over_voltage=0
 [all]
 
 [pi3]
@@ -42,15 +53,9 @@ gpu_freq=400
 core_freq=400
 sdram_freq=450
 over_voltage_sdram=0
+over_voltage=0
 [all]
 
-
-#-- optionals
-# disable_overscan=1
-# hdmi_safe=1
-# hdmi_force_hotplug=1
-# config_hdmi_boost=4
-# hdmi_drive=2
 
 
 
@@ -108,6 +113,10 @@ sdram_freq_min=
 
 
 [pi3]
+arm_freq_min=
+gpu_freq_min=
+core_freq_min=
+sdram_freq_min=
 [all]
 
 
@@ -119,6 +128,12 @@ sdram_freq_min=
 
 
 [pi2]
+arm_freq=1000
+gpu_freq=500
+core_freq=500
+sdram_freq=500
+over_voltage_sdram=0
+over_voltage=2
 [all]
 
 
@@ -156,6 +171,21 @@ over_voltage=2
 #-- custom overclock choices
 
 [pi1]
+#-- @ 950Hz
+arm_freq=950
+gpu_freq=450
+core_freq=450
+sdram_freq=460
+over_voltage=3
+over_voltage_sdram=2
+
+#-- @ 1000Hz
+arm_freq=1000
+gpu_freq=500
+core_freq=500
+sdram_freq=450
+over_voltage=4
+over_voltage_sdram=2
 [all]
 
 
