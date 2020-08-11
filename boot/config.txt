@@ -58,31 +58,6 @@ over_voltage=0
 
 
 
-
-#-- device opts
-[pi1]
-arm_freq_min=
-gpu_freq_min=
-core_freq_min=
-sdram_freq_min=
-[all]
-
-[p12]
-arm_freq_min=
-gpu_freq_min=
-core_freq_min=
-sdram_freq_min=
-[all]
-
-[pi3]
-arm_freq_min=333
-gpu_freq_min=200
-core_freq_min=200
-sdram_freq_min=200
-over_voltage_min=-2
-[all]
-
-
 #-- global overclocking
 
 [all]
@@ -95,7 +70,8 @@ dtparam=sd_overclock=66
 [all]
 
 
-#-- device overclocking
+
+#-- device overclocking mins
 [pi1]
 arm_freq_min=
 gpu_freq_min=
@@ -113,10 +89,11 @@ sdram_freq_min=
 
 
 [pi3]
-arm_freq_min=
-gpu_freq_min=
-core_freq_min=
-sdram_freq_min=
+arm_freq_min=333
+gpu_freq_min=200
+core_freq_min=200
+sdram_freq_min=200
+over_voltage_min=-2
 [all]
 
 
@@ -162,12 +139,10 @@ over_voltage=2
 
 
 
-
-
-
-
-
 [none]
+
+
+
 #-- custom overclock choices
 
 [pi1]
@@ -226,4 +201,3 @@ over_voltage_sdram=2
 #over_voltage=6
 #sdram_over_voltage=2
 [all]
-
