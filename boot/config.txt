@@ -4,8 +4,7 @@
 
 
 
-
-
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 #-- optionals
 # disable_overscan=1
 # hdmi_safe=1
@@ -15,7 +14,9 @@
 
 
 
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 #-- misc global
+
 [all]
 total_mem=1024
 disable_splash=1
@@ -28,36 +29,30 @@ max_usb_current=1
 
 
 
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 #-- defaults
+
 [pi1]
 arm_freq=700
-gpu_freq=250
-core_freq=500
-sdram_freq=500
-over_voltage_sdram=0
-over_voltage=0
+core_freq=250
+sdram_freq=400
 [all]
 
 [pi2]
 arm_freq=900
-gpu_freq=250
 core_freq=250
 sdram_freq=450
-over_voltage_sdram=0
-over_voltage=0
 [all]
 
 [pi3]
 arm_freq=1200
-gpu_freq=400
 core_freq=400
 sdram_freq=450
-over_voltage_sdram=0
-over_voltage=0
 [all]
 
 
 
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 #-- global overclocking
 
 [all]
@@ -71,22 +66,22 @@ dtparam=sd_overclock=66
 
 
 
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 #-- device overclocking mins
-[pi1]
-arm_freq_min=
-gpu_freq_min=
-core_freq_min=
-sdram_freq_min=
-[all]
 
+[pi1]
+arm_freq_min=400
+core_freq_min=250
+gpu_freq_min=250
+sdram_freq_min=250
+[all]
 
 [pi2]
-arm_freq_min=
-gpu_freq_min=
-core_freq_min=
-sdram_freq_min=
+arm_freq_min=400
+core_freq_min=250
+gpu_freq_min=250
+sdram_freq_min=250
 [all]
-
 
 [pi3]
 arm_freq_min=333
@@ -98,34 +93,23 @@ over_voltage_min=-2
 
 
 
-#-- raspi-config overclocks
+#-- active overlock 
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-[pi1]
+[pi1] #-- raspi-config "High"
+arm_freq=950
+core_freq=250
+sdram_freq=450
+over_voltage=6
 [all]
-
 
 [pi2]
-arm_freq=1000
-gpu_freq=500
+arm_freq=1100
 core_freq=500
 sdram_freq=500
-over_voltage_sdram=0
+over_voltage_sdram=1
 over_voltage=2
 [all]
-
-
-[pi3]
-[all]
-
-
-
-#-- active overlock 
-[pi1]
-[all]
-
-[p12]
-[all]
-
 
 [pi3] #-- stable
 arm_freq=1300
@@ -138,33 +122,94 @@ over_voltage=2
 [all]
 
 
-
 [none]
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-
-
-#-- custom overclock choices
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+#-- raspi-config overclocks
 
 [pi1]
-#-- @ 950Hz
-arm_freq=950
-gpu_freq=450
-core_freq=450
-sdram_freq=460
-over_voltage=3
-over_voltage_sdram=2
+#-- Modest
+#arm_freq=800
+#core_freq=250
+#sdram_freq=400
+#over_voltage=0
 
-#-- @ 1000Hz
-arm_freq=1000
-gpu_freq=500
-core_freq=500
-sdram_freq=450
-over_voltage=4
-over_voltage_sdram=2
+#-- Medium
+#arm_freq=900
+#core_freq=250
+#sdram_freq=450
+#over_voltage=2
+
+#-- High
+#arm_freq=950
+#core_freq=250
+#sdram_freq=450
+#over_voltage=6
+
+#-- Turbo
+#arm_freq=1000
+#core_freq=500
+#sdram_freq=600
+#over_voltage=6
 [all]
 
 
 [pi2]
+#-- High
+#arm_freq=1000
+#core_freq=500
+#sdram_freq=500
+#over_voltage_sdram=0
+#over_voltage=2
+[all]
+
+
+[pi3]
+[all]
+
+
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+#-- custom overclock choices
+
+[pi1]
+#-- @ 950Hz
+#arm_freq=950
+#core_freq=450
+#gpu_freq=450
+#sdram_freq=460
+#over_voltage=3
+#over_voltage_sdram=2
+
+#-- @ 1000Hz
+#arm_freq=1000
+#core_freq=500
+#gpu_freq=500
+#sdram_freq=450
+#over_voltage=4
+#over_voltage_sdram=2
+[all]
+
+
+[pi2]
+#-- @ 1.05GHz
+#arm_freq=1050
+#core_freq=525
+#gpu_freq=450
+#sdram_freq=450
+#over_voltage=2
+#over_voltage_sdram=2
+
+#-- @ 1.10GHz
+#arm_freq=1100
+#core_freq=550
+#gpu_freq=550
+#sdram_freq=450
+#over_voltage=4
+#over_voltage_sdram_c=0
+#over_voltage_sdram_i=0
+#over_voltage_sdram_p=0
 [all]
 
 
@@ -201,3 +246,6 @@ over_voltage_sdram=2
 #over_voltage=6
 #sdram_over_voltage=2
 [all]
+
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
