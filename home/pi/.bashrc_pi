@@ -1,25 +1,25 @@
+
 #printf ".bashrc_pi -> dirname : [%s] basename [%s]\n" "`dirname $0`" "`basename $0`"
 printf " -=>> %s/.bashrc_pi\n" $HOME
 
 
-#-- personalize
-HISTTIMEFORMAT='%F %T '
-
-
+#-- current cpu freq
 cpu_freq() {
-	local freq_hz=$(sudo cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq)
-	#local freq_ghz=$(echo "$freq_hz/1000000" | bc -l | awk '{print substr($0, 1, 7)≈}')
-#	printf "%sGHz // %sHz\n" $freq_ghz $freq_hz
-	printf "%sHz\n" $freq_hz
+    local freq_hz=$(sudo cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq)
+    #local freq_ghz=$(echo "$freq_hz/1000000" | bc -l | awk '{print substr($0, 1, 7)≈}')
+    #printf "%sGHz // %sHz\n" $freq_ghz $freq_hz
+    printf "%sHz\n" $freq_hz
 }
 
+##-- current cpu temp in C & F
 cpu_temp() {
-	local temp_cel=$(echo "`cat /sys/devices/virtual/thermal/thermal_zone0/temp`/1000" | bc -l | awk '{print substr($0, 1, 4)}')
-	local temp_feh=$(echo "(($temp_cel*9)/5)+32" | bc -l | awk '{print substr($0, 1, 6)}')
-	#awk '{printf "%.02f°F\n", (($0 * 0.001) * (9 / 5)) + 32}' <<< "`cat /sys/class/thermal/thermal_zone0/temp`"  |   |
-	printf "%f°C // %f°F\n" $temp_cel $temp_feh
+    local temp_cel=$(echo "`cat /sys/devices/virtual/thermal/thermal_zone0/temp`/1000" | bc -l | awk '{print substr($0, 1, 4)}')
+    local temp_feh=$(echo "(($temp_cel*9)/5)+32" | bc -l | awk '{print substr($0, 1, 6)}')
+    #awk '{printf "%.02f°F\n", (($0 * 0.001) * (9 / 5)) + 32}' <<< "`cat /sys/class/thermal/thermal_zone0/temp`"  |   |
+    printf "%f°C // %f°F\n" $temp_cel $temp_feh
 }
 
+#-- better man pages
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -31,14 +31,19 @@ man() {
 }
 
 
+#-- sys env exports
 export EDITOR=nano
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export LESS='-XR'
-export LESSOPEN="| /usr/local/bin/source-highlight-esc.sh %s"
 export PAGER=less
-export VISUAL=nano
+export TERM=xterm-256color
 
 
+#-- custom env
+export EX_IP4=$(curl --silient http://ip-api.com/json | jq .query | tr -d '\"')
+
+
+#-- sudo overrides
 alias apt='sudo apt'
 alias dkms='sudo dkms'
 alias dpkg='sudo dpkg'
@@ -50,29 +55,61 @@ alias systemctl='sudo systemctl'
 alias shutdown='sudo shutdown now'
 alias umount='sudo umount'
 
+
+#-- sudo alts
+alias scat='sudo cat'
+alias snano='sudo nano'
+
+
+#-- enable colorings
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias zgrep='zgrep --color=auto'
 alias ls='ls --color=auto'
+[ -x colordiff ] && alias diff='colordiff'
 
+
+#-- other overrides
+alias bc='bc -l'
+alias mkdir='mkdir -pv'
+alias netstat='netstat -tulanp '
+alias ping='ping -c3'
 alias pv='pv --timer --bytes --rate --average-rate --progress --eta --wait'
 
-alias scat='sudo cat'
-alias snano='sudo nano'
 
+#-- customs
 alias apt-list='apt list --upgradable'
+alias cls="echo $'\ec'"
+alias git-diff='git diff --shortstat HEAD'
+alias headers='curl --head'
+alias hg='history | grep '
 alias ll='ls -plAh'
 alias lll='ll | less'
 alias llt='ll -T'
 alias llr='llt -r'
-alias cls="echo $'\ec'"
-
-#alias cpu_temp='cat /sys/devices/virtual/thermal/thermal_zone0/temp'
-#alias cpu_freq='sudo cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq'
+alias sha1='openssl sha1'
+alias weather='curl https://wttr.in --silent | head -7 ; echo'
 
 
+#-- type-o fixes
+alias exiy='exit'
+
+
+#-- enable less piping
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+
+#-- history opts
+HISTTIMEFORMAT='%F %T '
 
 shopt -s histappend
 shopt -s globstar
+
+
+
+
+
+
+#alias cpu_temp='cat /sys/devices/virtual/thermal/thermal_zone0/temp'
+#alias cpu_freq='sudo cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq'
