@@ -12,7 +12,7 @@ set positionlog
 set regexp
 set smooth
 set tabsize 4
-unset tabstospaces
+set tabstospaces
 
 #-- colors
 set titlecolor brightyellow,magenta
