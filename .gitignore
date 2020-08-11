@@ -1,5 +1,9 @@
 
-
 #-- nano stuff
 /**/*.save
+/**/*.swp
 /**/*~
+
+
+#-- testing temp
+/_tmp
