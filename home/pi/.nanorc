@@ -1,7 +1,7 @@
 
 #-- user coloring
 set titlecolor brightwhite,blue
-set statuscolor brightyellow
+set statuscolor white
 set errorcolor brightred
 set selectedcolor brightyellow,magenta
 #set stripecolor yellow
