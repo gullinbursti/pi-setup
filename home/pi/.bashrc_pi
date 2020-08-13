@@ -1,7 +1,14 @@
 
 
+#-- --=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-- --#
 printf " -=>> %s/.bashrc_pi\n" $HOME
+#-- --=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-- --#
 
+
+
+
+# \\ [ custom cmds ]\_
+# \\~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~\_
 
 #-- current cpu freq
 cpu_freq() {
@@ -9,17 +16,29 @@ cpu_freq() {
     #local freq_ghz=$(echo "$freq_hz/1000000" | bc -l | awk '{print substr($0, 1, 7)≈}')
     #printf "%sGHz // %sHz\n" $freq_ghz $freq_hz
     printf "%sHz\n" $freq_hz
-}
+} #/=-=-=-=-=-=-=-=-=[+]=-=-=-=-=-=-=-=-=/
 
-#-- current cpu temp in C & F
+
+#-- current cpu temp
 cpu_temp() {
     local temp_cel=$(echo "`cat /sys/devices/virtual/thermal/thermal_zone0/temp`/1000" | bc -l | awk '{print substr($0, 1, 4)}')
     local temp_feh=$(echo "(($temp_cel*9)/5)+32" | bc -l | awk '{print substr($0, 1, 6)}')
     #awk '{printf "%.02f°F\n", (($0 * 0.001) * (9 / 5)) + 32}' <<< "`cat /sys/class/thermal/thermal_zone0/temp`"  |   |
     printf "%f°C // %f°F\n" $temp_cel $temp_feh
-}
+} #/=-=-=-=-=-=-=-=-=[+]=-=-=-=-=-=-=-=-=/
 
-#-- better man pages
+
+#-- uptime as dd mm ss
+utime() {
+    uptime | awk '{if (index($4, "day")) {t=split($5, T, ":"); printf "%02dd %02dm %02ds\n",$3,T[1],T[2]} else {t=split($3, T, ":"); printf "%02dm %02ds\n",T[1],T[2]}}'
+} #/=-=-=-=-=-=-=-=-=[+]=-=-=-=-=-=-=-=-=/
+# //~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~/'
+
+
+
+# \\ [ cmd overrides ]\_
+# \\~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~\_
+
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -28,27 +47,35 @@ man() {
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[01;32m' \
     command man "$@"
-}
-
-#-- uptime as dd mm ss
-utime() {
-    uptime | awk '{if (index($4, "day")) {t=split($5, T, ":"); printf "%02dd %02dm %02ds\n",$3,T[1],T[2]} else {t=split($3, T, ":"); printf "%02dm %02ds\n",T[1],T[2]}}'
-}
+} #/=-=-=-=-=-=-=-=-=[+]=-=-=-=-=-=-=-=-=/
+# //~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~/'
 
 
+#-- --=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-- --#
 
-#-- sys env exports
+
+# \\ [ env exports ]\_
+# \\~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~\_
+
+#-- system
 export EDITOR=nano
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export LESS='-XR'
 export PAGER=less
 export TERM=xterm-256color
 
-#-- custom env
+#-- custom
 export WAN_IP4=$(curl --silent http://ip-api.com/json | jq .query | tr -d '\"')
 export WLAN_IP4=$(ifconfig | grep -E inet\  | awk '{print $2}')
 export WLAN_IP6=$(ifconfig | grep inet6 | awk '{print length($2),$2}' | sort -n | tail -1 | awk '{print $2}')
+# //~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~/'
 
+
+#-- --=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-- --#
+
+
+# \\ [ alias defs ]\_
+# \\~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~\_
 
 #-- sudo overrides
 alias apt='sudo apt'
@@ -103,15 +130,37 @@ alias weather='curl https://wttr.in --silent | head -7 ; echo'
 
 #-- type-o fixes
 alias exiy='exit'
+# //~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~/'
+
+
+#-- --=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-- --#
+
+
+# \\ [ history cfg ]\_
+# \\~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~\_
+HISTTIMEFORMAT='%F %T '
+
+shopt -s histappend
+shopt -s globstar
+# //~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~/'
+
+
+# \\ [ git format ]\_
+# \\~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~\_
+
+function parse_git_dirty() { [[ $(git status 2> /dev/null | tail -1) != "nothing to commit, working tree clean" ]] && echo "*" ;}
+function parse_git_branch() { git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/" ;}
+export PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[1;33m\]\w\[\033[0m\]$(parse_git_branch)$ '
+# //~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~/'
+
+
+#-- --=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-- --#
 
 
 #-- enable less piping
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 
-#-- history opts
-HISTTIMEFORMAT='%F %T '
+#-- --=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-- --#
 
-shopt -s histappend
-shopt -s globstar
-
+#-- --=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-- --#
