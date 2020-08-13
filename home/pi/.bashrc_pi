@@ -1,5 +1,5 @@
 
-#printf ".bashrc_pi -> dirname : [%s] basename [%s]\n" "`dirname $0`" "`basename $0`"
+
 printf " -=>> %s/.bashrc_pi\n" $HOME
 
 
@@ -11,7 +11,7 @@ cpu_freq() {
     printf "%sHz\n" $freq_hz
 }
 
-##-- current cpu temp in C & F
+#-- current cpu temp in C & F
 cpu_temp() {
     local temp_cel=$(echo "`cat /sys/devices/virtual/thermal/thermal_zone0/temp`/1000" | bc -l | awk '{print substr($0, 1, 4)}')
     local temp_feh=$(echo "(($temp_cel*9)/5)+32" | bc -l | awk '{print substr($0, 1, 6)}')
@@ -30,11 +30,11 @@ man() {
     command man "$@"
 }
 
-
 #-- uptime as dd mm ss
 utime() {
     uptime | awk '{if (index($4, "day")) {t=split($5, T, ":"); printf "%02dd %02dm %02ds\n",$3,T[1],T[2]} else {t=split($3, T, ":"); printf "%02dm %02ds\n",T[1],T[2]}}'
 }
+
 
 
 #-- sys env exports
@@ -43,7 +43,6 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 export LESS='-XR'
 export PAGER=less
 export TERM=xterm-256color
-
 
 #-- custom env
 export WAN_IP4=$(curl --silent http://ip-api.com/json | jq .query | tr -d '\"')
@@ -63,20 +62,19 @@ alias systemctl='sudo systemctl'
 alias shutdown='sudo shutdown now'
 alias umount='sudo umount'
 
-
 #-- sudo alts
 alias scat='sudo cat'
+alias schmod='sudo chmod'
+alias schown='sudo chown'
 alias snano='sudo nano'
 
-
-#-- enable colorings
+#-- colorings
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias zgrep='zgrep --color=auto'
 alias ls='ls --color=auto'
 [ -x colordiff ] && alias diff='colordiff'
-
 
 #-- other overrides
 alias bc='bc -l'
@@ -86,20 +84,22 @@ alias netstat='netstat -tulanp '
 alias ping='ping -c3'
 alias pv='pv --timer --bytes --rate --average-rate --progress --eta --wait'
 
-
 #-- customs
+alias ..='cd ../'
 alias apt-list='apt list --upgradable'
 alias cls="echo $'\ec'"
-alias git-diff='git diff --shortstat HEAD'
+alias cpuinfo_freq='sudo cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq'
+alias cpuinfo_temp='cat /sys/devices/virtual/thermal/thermal_zone0/temp'
+alias git-diff='git diff --shortstat HEAD '
 alias headers='curl --head'
 alias hg='history | grep '
 alias ll='ls -plAh'
+alias llb='ls -plA'
 alias lll='ll | less'
+alias llr='ll -R'
 alias llt='ll -T'
-alias llr='llt -r'
 alias sha1='openssl sha1'
 alias weather='curl https://wttr.in --silent | head -7 ; echo'
-
 
 #-- type-o fixes
 alias exiy='exit'
@@ -115,10 +115,3 @@ HISTTIMEFORMAT='%F %T '
 shopt -s histappend
 shopt -s globstar
 
-
-
-
-
-
-#alias cpu_temp='cat /sys/devices/virtual/thermal/thermal_zone0/temp'
-#alias cpu_freq='sudo cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq'
