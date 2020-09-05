@@ -45,21 +45,6 @@ mnt_stubs() {
 }
 
 
-apt_src() {
-	local deb_file=/etc/apt/sources.list
-	local rpi_file=/etc/apt/sources.list.d/raspi.list
-
-	[ -f "$deb_file" ] && sudo cp $deb_file.bak
-	[ -f "$rpi_file" ] && sudo cp $rpi_file.bak
-
-	sudo sed -Ei 's/#Uncomment/\n#Uncomment/g' $deb_file
-	sudo sed -Ei 's/#deb-src/deb-src/g' $deb_file
-
-	sudo sed -Ei 's/#Uncomment/\n#Uncomment/g' $rpi_file
-	sudo sed -Ei 's/#deb-src/deb-src/g' $rpi_file
-}
-
-
 console_font() {
 	local font_file=/etc/default/console-setup
 	[ -f "$font_file" ] && sudo cp $font_file.bak
@@ -96,10 +81,6 @@ echo
 
 printf "Creating mount pt stub dirs at %s..." "/media/pi"
 mnt_stubs
-echo
-
-printf "Enabling \`apt-get source\`..."
-apt_src
 echo
 
 printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
