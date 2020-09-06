@@ -5,7 +5,7 @@
 user_grps() {
 	local grps_add="staff"
 
-	sudo usermod --groups "$grps_add" --append
+	sudo usermod --groups "$grps_add" --append pi
 }
 
 
