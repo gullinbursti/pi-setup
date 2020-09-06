@@ -42,7 +42,7 @@ apt_upg() {
 
 
 apt_inst() {
-    local pkgs="bc exfat-utils git hfsutils jq pv source-highlight sysbench tmux wget"
+    local pkgs="bc exfat-utils gawk git hfsutils jq pv source-highlight sysbench tmux wget"
 #    local pkgs_ins=$(apt list 2> /dev/null | grep installed)
 
     echo $pkgs | awk 'BEGIN {RS=" "} ; {print length($0),$0}' | gawk 'BEGIN {max=0 ; tot=0} ; {if($1 > max) max=$1 ; arr[tot]=$2 ; tot=tot+1} ; END {for(i=0; i<tot-1; i++) printf "[%*s]\n",(max),arr[i]}' | tr ' ' '.' | sed -E 's/([a-z\-]+)/ \1 /g' ; echo
