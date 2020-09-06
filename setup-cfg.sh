@@ -82,7 +82,7 @@ clear
 printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
 console_font
 
-printf "Modifying system /etc files..."
+printf "Modifying system bash & nano /etc files..."
 bash_sys
 nano_sys
 echo
@@ -95,9 +95,11 @@ echo
 
 printf "Refreshing fs source..."
 source /etc/profile
+source /home/pi/.profile
 echo
 
-printf "Setup Complete!\n"
+read -n 1 -s -r -p "Completed system + home cfg setup! Press any key to reboot..." && clear
+sudo reboot
 
 
 exit 0;

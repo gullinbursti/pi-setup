@@ -23,25 +23,17 @@ mnt_stubs() {
 		[ ! -d "$mnt_root/usb$i" ] && sudo mkdir -p ${mnt_root}/usb${i}
 	done
 
+	#-- apply ownership + access
+	sudo chown -R root:adm $mnt_root
+	sudo chmod -R 775 $mnt_root
+
 	#-- make symlinks to 1st usb
 	if [ ! -s "$mnt_root/usb" ]; then
 		cd $mnt_root
 		sudo ln -s ./usb0 usb
 	fi
 
-	if [ ! -s $mnt_root/usb ]; then
-		cd $mnt_root/../
-		sudo ln -s ./pi/usb
-	fi
-
-	if [ ! -s /home/pi/usb ]; then
-		cd /home/pi
-		ln -s $mnt_root/usb
-	fi
-
-	#-- apply ownership + access
-	sudo chown -R root:adm $mnt_root
-	sudo chmod -R 775 $mnt_root
+	[ ! -s /home/pi/usb ] && ln -s $mnt_root/usb /home/pi
 }
 
 
@@ -68,7 +60,7 @@ printf "Replacing boot configs..."
 boot_config
 echo
 
-printf "Creating mount pt stub dirs at %s..." "/media/pi"
+printf "Creating stub dirs for USB mounting at %s..." "/media/pi"
 mnt_stubs
 echo
 
@@ -76,8 +68,7 @@ printf "Changing locale to %s..." "en_US.UTF-8"
 change_locale
 echo
 
-printf "Setup Complete! Press any key to reboot...\n"
-input
+read -n 1 -s -r -p "Completed filesystem changes! Press any key to reboot...\n" && clear
 sudo reboot
 
 

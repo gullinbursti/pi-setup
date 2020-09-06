@@ -83,7 +83,7 @@ printf "Auto removing + auto clean up...\n"
 apt_cleanup ; echo
 
 
-read -n 1 -s -r -p "Setup complete for apt!, press any key to reboot..." && clear
+read -n 1 -s -r -p "Completed apt setup + updates! Press any key to reboot..." && clear
 sudo reboot
 
 

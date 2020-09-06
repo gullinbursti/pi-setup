@@ -31,7 +31,7 @@ git_globals "${github_username}" "${github_email}"
 echo
 
 
-printf "Setup Complete!\n"
+read -n 1 -s -r -p "Completed git setup / cfg! Press any key to quit." && echo
 
 
 exit 0;
