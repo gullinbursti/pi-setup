@@ -13,6 +13,13 @@ console_font() {
 }
 
 
+user_grps() {
+	local grps_add="staff"
+
+	sudo usermod --groups "$grps_add" --append
+}
+
+
 bash_sys() {
 	local rc_file=/etc/bash.bashrc
 
@@ -79,8 +86,13 @@ tmux() {
 
 
 clear
+printf "Adding user 'pi' to group(s) %s...\n" "staff"
+user_grps
+echo
+
 printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
 console_font
+echo
 
 printf "Modifying system bash & nano /etc files..."
 bash_sys
