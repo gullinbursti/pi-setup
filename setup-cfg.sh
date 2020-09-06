@@ -2,21 +2,21 @@
 
 
 
-console_font() {
-	local font_file=/etc/default/console-setup
-	[ -f "$font_file" ] && sudo cp $font_file.bak
-
-	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
-	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
-
-	sudo systemctl restart console-setup.service
-}
-
-
 user_grps() {
 	local grps_add="staff"
 
 	sudo usermod --groups "$grps_add" --append
+}
+
+
+opt_sys() {
+	local local_dir=/opt/local
+
+	#-- create a /local dir under opt
+	if [ ! -d "$local_dir" ]; then sudo mkdir -p $local_dir ; fi
+	sudo chown -R root:staff $local_dir
+	sudo chmod -R 775 $local_dir
+
 }
 
 
@@ -76,6 +76,17 @@ nano_home() {
 }
 
 
+console_font() {
+	local font_file=/etc/default/console-setup
+	[ -f "$font_file" ] && sudo cp $font_file.bak
+
+	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
+	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
+
+	sudo systemctl restart console-setup.service
+}
+
+
 tmux() {
 	local conf_file=/home/pi/.tmux.conf
 
@@ -90,8 +101,8 @@ printf "Adding user 'pi' to group(s) %s...\n" "staff"
 user_grps
 echo
 
-printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
-console_font
+printf "Creating a local dir under /opt & applying permissions...\m"
+opt_local
 echo
 
 printf "Modifying system bash & nano /etc files..."
@@ -105,10 +116,15 @@ nano_home
 tmux
 echo
 
+printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
+console_font
+echo
+
 printf "Refreshing fs source..."
 source /etc/profile
 source /home/pi/.profile
 echo
+
 
 read -n 1 -s -r -p "Completed system + home cfg setup! Press any key to reboot..." && clear
 sudo reboot
