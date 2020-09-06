@@ -45,17 +45,6 @@ mnt_stubs() {
 }
 
 
-console_font() {
-	local font_file=/etc/default/console-setup
-	[ -f "$font_file" ] && sudo cp $font_file.bak
-
-	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
-	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
-
-	sudo systemctl restart console-setup.service
-}
-
-
 change_locale() {
 	local locale=en_US.UTF-8
 	local locale_opts=$(locale | awk -F\= '~/[^en_US.UTF-8]/{print}')
@@ -82,9 +71,6 @@ echo
 printf "Creating mount pt stub dirs at %s..." "/media/pi"
 mnt_stubs
 echo
-
-printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
-console_font
 
 printf "Changing locale to %s..." "en_US.UTF-8"
 change_locale

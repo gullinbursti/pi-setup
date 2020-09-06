@@ -2,6 +2,17 @@
 
 
 
+console_font() {
+	local font_file=/etc/default/console-setup
+	[ -f "$font_file" ] && sudo cp $font_file.bak
+
+	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
+	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
+
+	sudo systemctl restart console-setup.service
+}
+
+
 bash_fs() {
 	local rc_file=/etc/bash.bashrc
 
@@ -10,6 +21,7 @@ bash_fs() {
 	sudo printf "\n\n#-- appended by pi-setup\n" >> $rc_file
 	sudo cat ./etc/bash.bashrc >> $rc_file
 }
+
 
 nano_fs() {
 	local bkup_dir=/usr/local/var/nano/backups
@@ -42,6 +54,7 @@ bash_home() {
 
 }
 
+
 nano_home() {
 	local rc_file=/home/pi/.nanorc
 	local rc_dir=/home/pi/.nano
@@ -55,6 +68,7 @@ nano_home() {
 	cp -p ./home/pi/.nano/* $rc_dir/
 }
 
+
 tmux() {
 	local conf_file=/home/pi/.tmux.conf
 
@@ -65,6 +79,9 @@ tmux() {
 
 
 clear
+printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
+console_font
+
 printf "Modifying /etc files..."
 bash_fs
 nano_fs
