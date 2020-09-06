@@ -13,7 +13,7 @@ console_font() {
 }
 
 
-bash_fs() {
+bash_sys() {
 	local rc_file=/etc/bash.bashrc
 
 	#-- backup & append rc
@@ -23,7 +23,7 @@ bash_fs() {
 }
 
 
-nano_fs() {
+nano_sys() {
 	local bkup_dir=/usr/local/var/nano/backups
 	local rc_file=/etc/nanorc
 
@@ -82,9 +82,9 @@ clear
 printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
 console_font
 
-printf "Modifying /etc files..."
-bash_fs
-nano_fs
+printf "Modifying system /etc files..."
+bash_sys
+nano_sys
 echo
 
 printf "Modifying %s files..." "/home/pi"
