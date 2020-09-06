@@ -102,7 +102,7 @@ user_grps
 echo
 
 printf "Creating a local dir under /opt & applying permissions...\m"
-opt_local
+opt_sys
 echo
 
 printf "Modifying system bash & nano /etc files..."
