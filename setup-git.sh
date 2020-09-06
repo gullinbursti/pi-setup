@@ -24,9 +24,9 @@ git_globals() {
 
 
 clear
-printf "Configuring git / prepping GitHub…\n[%s=]\n" "`printf '=-'%.0s {1..18}`"
+printf "Configuring for git + prepping GitHub…\n[%s=]\n" "`printf '=-'%.0s {1..18}`"
 
-printf "\t - Configuring git globals…"
+printf "Configuring git globals..."
 git_globals "${github_username}" "${github_email}"
 echo
 
