@@ -69,7 +69,7 @@ apt_cleanup() {
 dry_run=false
 
 
-
+clear
 printf "Enabling deb-src packages in sources.list...\n"
 apt_src ; echo
 
@@ -83,7 +83,8 @@ printf "Auto removing + auto clean up...\n"
 apt_cleanup ; echo
 
 
-read -n 1 -s -r -p "Setup complete for apt!, press any key to reboot..." && sudo reboot
+read -n 1 -s -r -p "Setup complete for apt!, press any key to reboot..." && clear
+sudo reboot
 
 
 exit 0;
