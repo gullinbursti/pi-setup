@@ -15,6 +15,10 @@ boot_config() {
 }
 
 
+group_mod() {
+    local add_grps=( wheel )
+}
+
 mnt_stubs() {
 	local mnt_root=/media/pi
 
@@ -92,6 +96,10 @@ change_locale() {
 clear
 printf "Replacing boot configs..."
 boot_config
+echo
+
+printf "Creating group 'wheel' & adding user 'pi' to it + 'staff' groups..."
+group_mod
 echo
 
 printf "Creating mount pt stub dirs at %s..." "/media/pi"
