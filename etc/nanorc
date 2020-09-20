@@ -15,7 +15,7 @@ set tabsize 4
 set tabstospaces
 
 #-- colors
-set titlecolor brightyellow,magenta
+set titlecolor brightwhite,magenta
 set statuscolor brightwhite
 set errorcolor brightwhite,red
 set selectedcolor brightwhite,cyan
