@@ -27,14 +27,14 @@ git_globals() {
 
 
 clear
-printf "Configuring git / prepping GitHub…\n[%s=]\n" "`printf '=-'%.0s {1..18}`"
+printf "Configuring for git + prepping GitHub…\n[%s=]\n" "`printf '=-'%.0s {1..18}`"
 
-printf "\t - Configuring git globals…"
+printf "Configuring git globals..."
 git_globals "${github_username}" "${github_email}"
 echo
 
 
-printf "Setup Complete!\n"
+read -n 1 -s -r -p "Completed git setup / cfg! Press any key to quit." && echo
 
 
 exit 0;

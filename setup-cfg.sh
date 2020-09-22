@@ -2,7 +2,25 @@
 
 
 
-bash_fs() {
+user_grps() {
+	local grps_add="staff"
+
+	sudo usermod --groups "$grps_add" --append pi
+}
+
+
+opt_sys() {
+	local local_dir=/opt/local
+
+	#-- create a /local dir under opt
+	if [ ! -d "$local_dir" ]; then sudo mkdir -p $local_dir ; fi
+	sudo chown -R root:staff $local_dir
+	sudo chmod -R 775 $local_dir
+
+}
+
+
+bash_sys() {
 	local rc_file=/etc/bash.bashrc
 
 	#-- backup & append rc
@@ -11,7 +29,8 @@ bash_fs() {
 	sudo cat ./etc/bash.bashrc >> $rc_file
 }
 
-nano_fs() {
+
+nano_sys() {
 	local bkup_dir=/usr/local/var/nano/backups
 	local rc_file=/etc/nanorc
 
@@ -42,6 +61,7 @@ bash_home() {
 
 }
 
+
 nano_home() {
 	local rc_file=/home/pi/.nanorc
 	local rc_dir=/home/pi/.nano
@@ -55,6 +75,18 @@ nano_home() {
 	cp -p ./home/pi/.nano/* $rc_dir/
 }
 
+
+console_font() {
+	local font_file=/etc/default/console-setup
+	[ -f "$font_file" ] && sudo cp $font_file.bak
+
+	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
+	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
+
+	sudo systemctl restart console-setup.service
+}
+
+
 tmux() {
 	local conf_file=/home/pi/.tmux.conf
 
@@ -65,9 +97,17 @@ tmux() {
 
 
 clear
-printf "Modifying /etc files..."
-bash_fs
-nano_fs
+printf "Adding user 'pi' to group(s) %s...\n" "staff"
+user_grps
+echo
+
+printf "Creating a local dir under /opt & applying permissions...\m"
+opt_sys
+echo
+
+printf "Modifying system bash & nano /etc files..."
+bash_sys
+nano_sys
 echo
 
 printf "Modifying %s files..." "/home/pi"
@@ -76,11 +116,18 @@ nano_home
 tmux
 echo
 
-printf "Refreshing fs source..."
-source /etc/profile
+printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
+console_font
 echo
 
-printf "Setup Complete!\n"
+printf "Refreshing fs source..."
+source /etc/profile
+source /home/pi/.profile
+echo
+
+
+read -n 1 -s -r -p "Completed system + home cfg setup! Press any key to reboot..." && clear
+sudo reboot
 
 
 exit 0;
