@@ -64,17 +64,17 @@ printf "Replacing boot configs..."
 boot_config
 echo
 
-printf "Creating group 'wheel' & adding user 'pi' to it + 'staff' groups..."
-group_mod
-echo
+#printf "Creating group 'wheel' & adding user 'pi' to it + 'staff' groups..."
+#group_mod
+#echo
 
 printf "Creating stub dirs for USB mounting at %s..." "/media/pi"
 mnt_stubs
 echo
 
-printf "Changing locale to %s..." "en_US.UTF-8"
-change_locale
-echo
+#printf "Changing locale to %s..." "en_US.UTF-8"
+#change_locale
+#echo
 
 read -n 1 -s -r -p "Completed filesystem changes! Press any key to reboot...\n" && clear
 sudo reboot
