@@ -23,8 +23,11 @@ git_globals() {
     printf " credential.helper as (store)…"
     git config --global credential.helper "store"
 
+    printf " credential.token as (342..54d)…"
+    git config --global credential.https://github.com.helper "342099d41c8dea76af408532dd5e4d22302b554d"
+
     printf " credential.usePath as (true)…"
-    git config --global credential.github.com.useHttpPath true
+    git config --global credential.https://github.com.useHttpPath true
 }
 
 

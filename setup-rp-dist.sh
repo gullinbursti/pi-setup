@@ -29,6 +29,7 @@ etc_rpdist() {
 	printf "Backing up original /etc files..."
 	if [ $dry_run == true ]; then sleep_dr
 	else
+		[ -f "console_file" && ! -f "${console_file}.rp-dist" ] && sudo cp $console_file $console_file.rp-dist
 		[ -f "bash_file" && ! -f "${bash_file}.rp-dist" ] && sudo cp $bash_file $bash_file.rp-dist
 		[ -f "nano_file" && ! -f "${nano_file}.rp-dist" ] && sudo cp $nano_file $nano_file.rp-dist
 		[ -f "apt1_file" && ! -f "${apt1_file}.rp-dist" ] && sudo cp $apt1_file $apt1_file.rp-dist
@@ -38,14 +39,26 @@ etc_rpdist() {
 
 
 home_rpdist() {
-    local prof_file=$HOME/.profile
-    local bashrc_file=$HOME/.bash_rc
+    local home_dir=/home/pi
+    local prof_file=$home_dir/.profile
+    local bashrc_file=$home_dir/.bash_rc
 
-    printf "Backing up original %s files..." $HOME
+    printf "Backing up original %s files..." $home_dir
     if [ $dry_run == true ]; then sleep_dr
     else
-        [ -f "prof_file" && ! -f "${prof_file}.rp-dist" ] && sudo cp $prof_file $prof_file.rp-dist
-        [ -f "bashrc_file" && ! -f "${bashrc_file}.rp-dist" ] && sudo cp $bashrc_file $bashrc_file.rp-dist
+        [ -f "prof_file" && ! -f "${prof_file}.rp-dist" ] && sudo cp -p $prof_file $prof_file.rp-dist
+        [ -f "bashrc_file" && ! -f "${bashrc_file}.rp-dist" ] && sudo cp -p $bashrc_file $bashrc_file.rp-dist
+    fi
+}
+
+
+usr_rpdist() {
+    local locale_file=/usr/share/locales/i18n/locales/en_US
+
+    printf "Backing up original /usr files..."
+    if [ $dry_run == true ]; then sleep_dr
+    else
+        [ -f "locale_file" && ! -f "${locale_file}.rp-dist" ] && sudo cp $locale_file $locale_file.rp-dist
     fi
 }
 
@@ -59,6 +72,7 @@ printf "Creating rp-dist files...\n" ; echo
 boot_rpdist ; echo
 etc_rpdist ; echo
 home_rpdist ; echo
+usr_rpdist ; echo
 
 
 echo ; read -n 1 -s -r -p "Completed rp-dist setup! Press any key continue..." ; echo ; echo
