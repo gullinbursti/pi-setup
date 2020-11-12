@@ -27,10 +27,10 @@ sys_rpdist() {
 	printf "Backing up original /etc files..."
 	if [ $dry_run == true ]; then sleep_dr
 	else
-		[ -f "bash_file" ] && sudo cp $bash_file $bash_file.rp-dist
-		[ -f "nano_file" ] && sudo cp $nano_file $nano_file.rp-dist
-		[ -f "apt1_file" ] && sudo cp $apt1_file $apt1_file.rp-dist
-		[ -f "apt2_file" ] && sudo cp $apt2_file $apt2_file.rp-dist
+		[ -f "bash_file" && ! -f "${bash_file}.rp-dist" ] && sudo cp $bash_file $bash_file.rp-dist
+		[ -f "nano_file" && ! -f "${nano_file}.rp-dist" ] && sudo cp $nano_file $nano_file.rp-dist
+		[ -f "apt1_file" && ! -f "${apt1_file}.rp-dist" ] && sudo cp $apt1_file $apt1_file.rp-dist
+		[ -f "apt2_file" && ! -f "${apt2_file}.rp-dist" ] && sudo cp $apt2_file $apt2_file.rp-dist
 	fi
 }
 
@@ -42,8 +42,8 @@ home_rpdist() {
     printf "Backing up original %s files..." $HOME
     if [ $dry_run == true ]; then sleep_dr
     else
-        [ -f "prof_file" ] && sudo cp $proc_file $prof_file.rp-dist
-        [ -f "bashrc_file" ] && sudo cp $bashrc_file $bashrc_file.rp-dist
+        [ -f "prof_file" && ! -f "${prof_file}.rp-dist" ] && sudo cp $prof_file $prof_file.rp-dist
+        [ -f "bashrc_file" && ! -f "${bashrc_file}.rp-dist" ] && sudo cp $bashrc_file $bashrc_file.rp-dist
     fi
 }
 

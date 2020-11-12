@@ -6,6 +6,8 @@ github_username="gullinbursti"
 
 
 git_globals() {
+    printf "Configuring git globals..."
+
     printf " color.ui as (auto)…"
     git config --global color.ui "auto"
 
@@ -20,18 +22,18 @@ git_globals() {
 
     printf " credential.helper as (store)…"
     git config --global credential.helper "store"
+
+    echo
 }
 
 
 clear
-printf "Configuring for git + prepping GitHub…\n[%s=]\n" "`printf '=-'%.0s {1..18}`"
+printf "Configuring for git + prepping GitHub…\n[%s=]\n\n" "`printf '=-'%.0s {1..18}`"
 
-printf "Configuring git globals..."
 git_globals "${github_username}" "${github_email}"
-echo
 
 
-read -n 1 -s -r -p "Completed git setup / cfg! Press any key to quit." && echo
+echo ; read -n 1 -s -r -p "Completed git setup / cfg! Press any key to quit." && echo ; echo
 
 
 exit 0;
