@@ -12,17 +12,19 @@ boot_rpdist() {
 	printf "Backing up original /boot files..."
 	if [ $dry_run == true ]; then sleep_dr
 	else
-		[ -f "conf_file" ] && sudo cp $conf_file $conf_file.rp-dist
-		[ -f "cmdl_file" ] && sudo cp $cmdl_file $cmdl_file.rp-dist
+		[ -f "$conf_file" ] && sudo cp -p $conf_file $conf_file.rp-dist
+		[ -f "$cmdl_file" ] && sudo cp -p $cmdl_file $cmdl_file.rp-dist
 	fi
 }
 
 
-sys_rpdist() {
-	local bash_file=/etc/bash.bashrc
-	local nano_file=/etc/nanorc
+etc_rpdist() {
 	local apt1_file=/etc/apt/sources.list
 	local apt2_file=/etc/apt/sources.list.d/raspi.list
+	local console_file=/etc/default/console-setup
+	local bash_file=/etc/bash.bashrc
+	local nano_file=/etc/nanorc
+	local rc_file=/etc/rc.local
 
 	printf "Backing up original /etc files..."
 	if [ $dry_run == true ]; then sleep_dr
@@ -55,7 +57,7 @@ dry_run=false
 clear
 printf "Creating rp-dist files...\n" ; echo
 boot_rpdist ; echo
-sys_rpdist ; echo
+etc_rpdist ; echo
 home_rpdist ; echo
 
 

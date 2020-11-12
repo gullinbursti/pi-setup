@@ -9,17 +9,6 @@ user_grps() {
 }
 
 
-opt_sys() {
-	local local_dir=/opt/local
-
-	#-- create a /local dir under opt
-	if [ ! -d "$local_dir" ]; then sudo mkdir -p $local_dir ; fi
-	sudo chown -R root:staff $local_dir
-	sudo chmod -R 775 $local_dir
-
-}
-
-
 bash_sys() {
 	local rc_file=/etc/bash.bashrc
 
@@ -72,13 +61,14 @@ nano_home() {
 
 	#-- copy syntax files
 	if [ ! -d "$rc_dir" ]; then mkdir -p $rc_dir ; fi
+	sudo chown -R pi:pi $rc_dir
 	cp -p ./home/pi/.nano/* $rc_dir/
 }
 
 
 console_font() {
 	local font_file=/etc/default/console-setup
-	[ -f "$font_file" ] && sudo cp $font_file.bak
+	[ -f "$font_file" ] && sudo cp -p $font_file $font_file.bak
 
 	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
 	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
@@ -99,10 +89,6 @@ tmux() {
 clear
 printf "Adding user 'pi' to group(s) %s...\n" "staff"
 user_grps
-echo
-
-printf "Creating a local dir under /opt & applying permissions...\m"
-opt_sys
 echo
 
 printf "Modifying system bash & nano /etc files..."

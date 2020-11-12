@@ -23,7 +23,8 @@ git_globals() {
     printf " credential.helper as (store)…"
     git config --global credential.helper "store"
 
-    echo
+    printf " credential.usePath as (true)…"
+    git config --global credential.github.com.useHttpPath true
 }
 
 
