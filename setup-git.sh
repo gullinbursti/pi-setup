@@ -31,6 +31,10 @@ git_globals() {
 
     printf " credential.token as (317..91d)…"
     git config --global credential.http://github.com.helper "317a23d5b261a5a5557832d5f303036388be591c"
+
+    printf "Hard writing git creds..."
+    echo "https://gullinbursti:317a23d5b261a5a5557832d5f303036388be591c@github.com" > ~/.git-credentials
+    chmod 600 ~/.git-credentials
 }
 
 
