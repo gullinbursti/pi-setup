@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-github_email="biflindi.fjolnir@gmail.com"
+github_email="code@solutionsmatty.com"
 github_username="gullinbursti"
 
 
@@ -23,18 +23,18 @@ git_globals() {
     printf " credential.helper as (store)…"
     git config --global credential.helper "store"
 
-    printf " credential.usePath as (true)…"
-    git config --global credential.http://github.com.usehttppath true
+#    printf " credential.usePath as (true)…"
+#    git config --global credential.http://github.com.usehttppath true
 
-    printf " credential.username as (gullinbursti)…"
-    git config -- global credential.http://github.com.username=gullinbursti
+#    printf " credential.username as (gullinbursti)…"
+#    git config -- global credential.http://github.com.username=gullinbursti
 
-    printf " credential.token as (317..91d)…"
-    git config --global credential.http://github.com.helper "317a23d5b261a5a5557832d5f303036388be591c"
+#    printf " credential.token as (317..91d)…"
+#    git config --global credential.http://github.com.helper "317a23d5b261a5a5557832d5f303036388be591c"
 
-    printf "Hard writing git creds..."
-    echo "https://gullinbursti:317a23d5b261a5a5557832d5f303036388be591c@github.com" > ~/.git-credentials
-    chmod 600 ~/.git-credentials
+#    printf "Hard writing git creds..."
+#    echo "https://gullinbursti:317a23d5b261a5a5557832d5f303036388be591c@github.com" > ~/.git-credentials
+#    chmod 600 ~/.git-credentials
 }
 
 
