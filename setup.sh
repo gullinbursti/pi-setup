@@ -6,19 +6,19 @@
 
 
 #-- aliases
-alias apt='sudo apt'
-alias ll='ls -pla'
+#alias apt='sudo apt'
+#alias ll='ls -pla'
 
 
 #-- install gawk first
-apt update && apt install gawk -y
+sudo apt update && sudo apt install gawk -y
 
 
 
-./setup-rpdist.sh
-./setup-apt.sh
-./setup-sys.sh
-./setup-cfg.sh
+sudo ./setup-rpdist.sh
+sudo ./setup-apt.sh
+sudo ./setup-sys.sh
+sudo ./setup-cfg.sh
 ./setup-git.sh
 
 
