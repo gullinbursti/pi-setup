@@ -48,7 +48,7 @@ mnt_stubs() {
 		sudo ln -s ./usb0 usb
 	fi
 
-	[ ! -s /home/pi/usb ] && ln -s $mnt_root/usb /home/pi
+	[ ! -s /home/pi/usb ] && ln -s $mnt_root/usb /home/pi/usb
 }
 
 
@@ -80,7 +80,7 @@ printf "Creating stub dirs for USB mounting at %s..." "/media/pi"
 mnt_stubs
 echo
 
-printf "Changing date/time locale formatting..."
+#printf "Changing date/time locale formatting..."
 #change_locale
 echo
 
