@@ -17,6 +17,8 @@ boot_config() {
 
 group_mod() {
     local add_grps=( wheel )
+#    sudo usermod --groups "$grps_add" --append pi
+#    sudo usermod --groups staff --append pi
 }
 
 
@@ -90,5 +92,3 @@ sudo reboot
 
 
 exit 0;
-
-
