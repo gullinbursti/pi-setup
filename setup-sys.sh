@@ -41,7 +41,7 @@ mnt_stubs() {
 	done
 
 	#-- apply ownership + access
-	sudo chown -R root:adm $mnt_root
+	sudo chown -R pi:adm $mnt_root
 	sudo chmod -R 775 $mnt_root
 
 	#-- make symlinks to 1st usb
