@@ -71,7 +71,7 @@ console_font() {
 	[ -f "$console_file" ] && sudo cp -p $console_file $console_file.bak
 
 	sudo printf "\n\n#-- appended by pi-setup\n" >> $console_file
-	sudo cat ./etc/default/console_setup >> $console_file
+	sudo cat ./etc/default/console-setup >> $console_file
 
 #	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
 #	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
