@@ -67,11 +67,14 @@ nano_home() {
 
 
 console_font() {
-	local font_file=/etc/default/console-setup
-	[ -f "$font_file" ] && sudo cp -p $font_file $font_file.bak
+	local console_file=/etc/default/console-setup
+	[ -f "$console_file" ] && sudo cp -p $console_file $console_file.bak
 
-	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
-	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
+	sudo printf "\n\n#-- appended by pi-setup\n" >> $console_file
+	sudo cat ./etc/default/console_setup >> $console_file
+
+#	sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
+#	sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
 
 	sudo systemctl restart console-setup.service
 }
@@ -102,7 +105,7 @@ nano_home
 tmux
 echo
 
-printf "Changing console font to %s / %s...\n" "Terminus" "8x16"
+printf "Changing console font to Terminus / 8x16...\n"
 console_font
 echo
 
