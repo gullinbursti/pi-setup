@@ -12,8 +12,8 @@ boot_rpdist() {
 	printf "Backing up original /boot files..."
 	if [ $dry_run == true ]; then sleep_dr
 	else
-		[ -f "$conf_file" ] && sudo cp -p $conf_file $conf_file.rp-dist
-		[ -f "$cmdl_file" ] && sudo cp -p $cmdl_file $cmdl_file.rp-dist
+		[[ -f "$conf_file" && ! -f "${conf_file}.rp-dist" ]] && sudo cp -p $conf_file $conf_file.rp-dist
+		[[ -f "$cmdl_file" && ! -f "${cmdl_file}.rp-dist" ]] && sudo cp -p $cmdl_file $cmdl_file.rp-dist
 	fi
 }
 
@@ -29,11 +29,11 @@ etc_rpdist() {
 	printf "Backing up original /etc files..."
 	if [ $dry_run == true ]; then sleep_dr
 	else
-		[ -f "console_file" && ! -f "${console_file}.rp-dist" ] && sudo cp $console_file $console_file.rp-dist
-		[ -f "bash_file" && ! -f "${bash_file}.rp-dist" ] && sudo cp $bash_file $bash_file.rp-dist
-		[ -f "nano_file" && ! -f "${nano_file}.rp-dist" ] && sudo cp $nano_file $nano_file.rp-dist
-		[ -f "apt1_file" && ! -f "${apt1_file}.rp-dist" ] && sudo cp $apt1_file $apt1_file.rp-dist
-		[ -f "apt2_file" && ! -f "${apt2_file}.rp-dist" ] && sudo cp $apt2_file $apt2_file.rp-dist
+		[[ -f "$console_file" && ! -f "${console_file}.rp-dist" ]] && sudo cp $console_file $console_file.rp-dist
+		[[ -f "$bash_file" && ! -f "${bash_file}.rp-dist" ]] && sudo cp $bash_file $bash_file.rp-dist
+		[[ -f "$nano_file" && ! -f "${nano_file}.rp-dist" ]] && sudo cp $nano_file $nano_file.rp-dist
+		[[ -f "$apt1_file" && ! -f "${apt1_file}.rp-dist" ]] && sudo cp $apt1_file $apt1_file.rp-dist
+		[[ -f "$apt2_file" && ! -f "${apt2_file}.rp-dist" ]] && sudo cp $apt2_file $apt2_file.rp-dist
 	fi
 }
 
@@ -46,8 +46,8 @@ home_rpdist() {
     printf "Backing up original %s files..." $home_dir
     if [ $dry_run == true ]; then sleep_dr
     else
-        [ -f "prof_file" && ! -f "${prof_file}.rp-dist" ] && sudo cp -p $prof_file $prof_file.rp-dist
-        [ -f "bashrc_file" && ! -f "${bashrc_file}.rp-dist" ] && sudo cp -p $bashrc_file $bashrc_file.rp-dist
+        [[ -f "$prof_file" && ! -f "${prof_file}.rp-dist" ]] && sudo cp -p $prof_file $prof_file.rp-dist
+        [[ -f "$bashrc_file" && ! -f "${bashrc_file}.rp-dist" ]] && sudo cp -p $bashrc_file $bashrc_file.rp-dist
     fi
 }
 
@@ -58,7 +58,7 @@ usr_rpdist() {
     printf "Backing up original /usr files..."
     if [ $dry_run == true ]; then sleep_dr
     else
-        [ -f "locale_file" && ! -f "${locale_file}.rp-dist" ] && sudo cp $locale_file $locale_file.rp-dist
+        [[ -f "$locale_file" && ! -f "${locale_file}.rp-dist" ]] && sudo cp $locale_file $locale_file.rp-dist
     fi
 }
 
