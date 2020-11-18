@@ -3,10 +3,10 @@
 set titlecolor brightwhite,blue
 set statuscolor white
 set errorcolor brightred
-set selectedcolor brightyellow,magenta
-#set stripecolor yellow
+set selectedcolor black,cyan
+#set stripecolor brightblack
 set numbercolor brightblack,black
-set keycolor brightgreen,blue
+set keycolor brightcyan,blue
 set functioncolor yellow
 
 
