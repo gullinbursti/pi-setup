@@ -26,7 +26,7 @@ kb_config() {
     local rc_file=/etc/rc.local
     [ -f "$rc_file" ] && sudo cp $rc_file $rc_file.bak
 
-    sudo sed -in 's/exit 0//' $rc_file
+    sudo sed -i 's/exit 0//' $rc_file
     sudo printf "\n\n#-- appended by pi-setup\n" >> $rc_file
     sudo cat ./etc/rc.local >> $rc_file
 }
@@ -36,7 +36,7 @@ mnt_stubs() {
 	local mnt_root=/media/pi
 
 	[ ! -d "$mnt_root" ] && sudo mkdir -p $mnt_root
-	for i in `seq 0 4`; do
+	for i in `seq 0 7`; do
 		[ ! -d "$mnt_root/usb$i" ] && sudo mkdir -p ${mnt_root}/usb${i}
 	done
 
@@ -44,7 +44,7 @@ mnt_stubs() {
 	sudo chown -R pi:adm $mnt_root
 	sudo chmod -R 775 $mnt_root
 
-	#-- make symlinks to 1st usb
+	#-- make symlink to 1st usb
 	if [ ! -s "$mnt_root/usb" ]; then
 		cd $mnt_root
 		sudo ln -s ./usb0 usb
@@ -55,15 +55,15 @@ mnt_stubs() {
 
 
 change_locale() {
-    local ampm_fmt=""
-    local date_fmt=""
+    local ampm_fmt="%H:%M:%S"
+    local date_fmt="%a %b %e %r %z %Y"
     local locale_file=/usr/share/i18n/locales/en_US
 
     #[ ! -z $(grep ampm $locale_file) ] && sudo sed -Ei 's/# (en_US.*)/\1/g' $locale_file
     #[ ! -z $(grep date $locale_file) ] && sudo sed -Ei 's/# (en_US.*)/\1/g' $locale_file
 
     sudo dkpg-reconfigure locale
-    date -u
+    printf "\nUTC time is: %s\n" `date -u`
 }
 
 
@@ -76,6 +76,10 @@ echo
 
 printf "Creating group 'wheel' & adding user 'pi' to it + 'staff' groups..."
 group_mod
+echo
+
+printf "Enabling NumLock on boot..."
+kb_config
 echo
 
 printf "Creating stub dirs for USB mounting at %s..." "/media/pi"
