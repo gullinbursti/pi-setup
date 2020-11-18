@@ -1,8 +1,17 @@
 #!/bin/bash
 
 
+
 github_email="code@solutionsmatty.com"
 github_username="gullinbursti"
+
+
+
+git_creds() {
+    printf "Setting access token...\n"
+#    echo "https://gullinbursti:317a23d5b261a5a5557832d5f303036388be591c@github.com" > ~/.git-credentials
+#    chmod 600 ~/.git-credentials
+}
 
 
 git_globals() {
@@ -24,12 +33,6 @@ git_globals() {
     git config --global credential.helper "store"
 }
 
-
-git_creds() {
-    printf "Setting access token...\n"
-#    echo "https://gullinbursti:317a23d5b261a5a5557832d5f303036388be591c@github.com" > ~/.git-credentials
-#    chmod 600 ~/.git-credentials
-}
 
 
 clear

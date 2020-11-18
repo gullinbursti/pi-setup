@@ -2,10 +2,6 @@
 
 
 
-csec_sleep() {
-    sleep `printf "%d.%02d" $(( (RANDOM % 1) + 0 )) $(( RANDOM % 100 ))`
-}
-
 
 bkup_file() {
     local src_file=$1
@@ -26,6 +22,11 @@ bkup_file() {
     else res=$(printf "Source file \`%s\` not found, skipping\n" $src_file) ; fi
 
     printf "$res"
+}
+
+
+csec_sleep() {
+    sleep `printf "%d.%02d" $(( (RANDOM % 1) + 0 )) $(( RANDOM % 100 ))`
 }
 
 

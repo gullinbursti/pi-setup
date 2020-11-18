@@ -6,35 +6,35 @@ sleep_dr() { sleep `printf "%d.%02d" $(( (RANDOM % 1) + 0 )) $(( RANDOM % 100 ))
 
 
 boot_rpdist() {
-	local conf_file=/boot/config.txt
-	local cmdl_file=/boot/cmdline.txt
+    local conf_file=/boot/config.txt
+    local cmdl_file=/boot/cmdline.txt
 
-	printf "Backing up original /boot files..."
-	if [ $dry_run == true ]; then sleep_dr
-	else
-		[[ -f "$conf_file" && ! -f "${conf_file}.rp-dist" ]] && sudo cp -p $conf_file $conf_file.rp-dist
-		[[ -f "$cmdl_file" && ! -f "${cmdl_file}.rp-dist" ]] && sudo cp -p $cmdl_file $cmdl_file.rp-dist
-	fi
+    printf "Backing up original /boot files..."
+    if [ $dry_run == true ]; then sleep_dr
+    else
+        [[ -f "$conf_file" && ! -f "${conf_file}.rp-dist" ]] && sudo cp -p $conf_file $conf_file.rp-dist
+        [[ -f "$cmdl_file" && ! -f "${cmdl_file}.rp-dist" ]] && sudo cp -p $cmdl_file $cmdl_file.rp-dist
+    fi
 }
 
 
 etc_rpdist() {
-	local apt1_file=/etc/apt/sources.list
-	local apt2_file=/etc/apt/sources.list.d/raspi.list
-	local console_file=/etc/default/console-setup
-	local bash_file=/etc/bash.bashrc
-	local nano_file=/etc/nanorc
-	local rc_file=/etc/rc.local
+    local apt1_file=/etc/apt/sources.list
+#    local apt2_file=/etc/apt/sources.list.d/raspi.list
+    local console_file=/etc/default/console-setup
+    local bash_file=/etc/bash.bashrc
+    local nano_file=/etc/nanorc
+    local rc_file=/etc/rc.local
 
-	printf "Backing up original /etc files..."
-	if [ $dry_run == true ]; then sleep_dr
-	else
-		[[ -f "$console_file" && ! -f "${console_file}.rp-dist" ]] && sudo cp $console_file $console_file.rp-dist
-		[[ -f "$bash_file" && ! -f "${bash_file}.rp-dist" ]] && sudo cp $bash_file $bash_file.rp-dist
-		[[ -f "$nano_file" && ! -f "${nano_file}.rp-dist" ]] && sudo cp $nano_file $nano_file.rp-dist
-		[[ -f "$apt1_file" && ! -f "${apt1_file}.rp-dist" ]] && sudo cp $apt1_file $apt1_file.rp-dist
-		[[ -f "$apt2_file" && ! -f "${apt2_file}.rp-dist" ]] && sudo cp $apt2_file $apt2_file.rp-dist
-	fi
+    printf "Backing up original /etc files..."
+    if [ $dry_run == true ]; then sleep_dr
+    else
+        [[ -f "$console_file" && ! -f "${console_file}.rp-dist" ]] && sudo cp $console_file $console_file.rp-dist
+        [[ -f "$bash_file" && ! -f "${bash_file}.rp-dist" ]] && sudo cp $bash_file $bash_file.rp-dist
+        [[ -f "$nano_file" && ! -f "${nano_file}.rp-dist" ]] && sudo cp $nano_file $nano_file.rp-dist
+        [[ -f "$apt1_file" && ! -f "${apt1_file}.rp-dist" ]] && sudo cp $apt1_file $apt1_file.rp-dist
+#        [[ -f "$apt2_file" && ! -f "${apt2_file}.rp-dist" ]] && sudo cp $apt2_file $apt2_file.rp-dist
+    fi
 }
 
 

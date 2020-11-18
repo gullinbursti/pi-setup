@@ -15,6 +15,33 @@ boot_config() {
 }
 
 
+change_locale() {
+    local ampm_fmt="%H:%M:%S"
+    local date_fmt="%a %b %e %r %z %Y"
+    local locale_file=/usr/share/i18n/locales/en_US
+
+    #[ ! -z $(grep ampm $locale_file) ] && sudo sed -Ei 's/# (en_US.*)/\1/g' $locale_file
+    #[ ! -z $(grep date $locale_file) ] && sudo sed -Ei 's/# (en_US.*)/\1/g' $locale_file
+
+    sudo dkpg-reconfigure locale
+    printf "\nUTC time is: %s\n" `date -u`
+}
+
+
+console_font() {
+    local console_file=/etc/default/console-setup
+    [ -f "$console_file" ] && sudo cp -p $console_file $console_file.bak
+
+    sudo printf "\n\n#-- appended by pi-setup\n" >> $console_file
+    sudo cat ./etc/default/console-setup >> $console_file
+
+#   sudo sed -Ei 's/FONTFACE.*/FONTFACE="Terminus"/g' $font_file
+#   sudo sed -Ei 's/FONTSIZE.*/FONTSIZE="8x16"/g' $font_file
+
+    sudo systemctl restart console-setup.service
+}
+
+
 group_mod() {
     local add_grps=( wheel )
 #    sudo usermod --groups "$grps_add" --append pi
@@ -33,39 +60,25 @@ kb_config() {
 
 
 mnt_stubs() {
-	local mnt_root=/media/pi
+    local mnt_root=/media/pi
 
-	[ ! -d "$mnt_root" ] && sudo mkdir -p $mnt_root
-	for i in `seq 0 7`; do
-		[ ! -d "$mnt_root/usb$i" ] && sudo mkdir -p ${mnt_root}/usb${i}
-	done
+    [ ! -d "$mnt_root" ] && sudo mkdir -p $mnt_root
+    for i in `seq 0 7`; do
+        [ ! -d "$mnt_root/usb$i" ] && sudo mkdir -p ${mnt_root}/usb${i}
+    done
 
-	#-- apply ownership + access
-	sudo chown -R pi:adm $mnt_root
-	sudo chmod -R 775 $mnt_root
+    #-- apply ownership + access
+    sudo chown -R pi:adm $mnt_root
+    sudo chmod -R 775 $mnt_root
 
-	#-- make symlink to 1st usb
-	if [ ! -s "$mnt_root/usb" ]; then
-		cd $mnt_root
-		sudo ln -s ./usb0 usb
-	fi
+    #-- make symlink to 1st usb
+    if [ ! -s "$mnt_root/usb" ]; then
+        cd $mnt_root
+        sudo ln -s ./usb0 usb
+    fi
 
-	[ ! -s /home/pi/usb ] && ln -s $mnt_root/usb /home/pi/usb
+    [ ! -s /home/pi/usb ] && ln -s $mnt_root/usb /home/pi/usb
 }
-
-
-change_locale() {
-    local ampm_fmt="%H:%M:%S"
-    local date_fmt="%a %b %e %r %z %Y"
-    local locale_file=/usr/share/i18n/locales/en_US
-
-    #[ ! -z $(grep ampm $locale_file) ] && sudo sed -Ei 's/# (en_US.*)/\1/g' $locale_file
-    #[ ! -z $(grep date $locale_file) ] && sudo sed -Ei 's/# (en_US.*)/\1/g' $locale_file
-
-    sudo dkpg-reconfigure locale
-    printf "\nUTC time is: %s\n" `date -u`
-}
-
 
 
 
@@ -78,21 +91,24 @@ printf "Creating group 'wheel' & adding user 'pi' to it + 'staff' groups..."
 group_mod
 echo
 
-printf "Enabling NumLock on boot..."
-kb_config
-echo
-
 printf "Creating stub dirs for USB mounting at %s..." "/media/pi"
 mnt_stubs
+echo
+
+printf "Enabling NumLock on boot..."
+kb_config
 echo
 
 #printf "Changing date/time locale formatting..."
 #change_locale
 echo
 
+printf "Changing console font to Terminus / 8x16...\n"
+console_font
+echo
+
 read -n 1 -s -r -p "Completed filesystem changes! Press any key to reboot...\n" && clear
 sudo reboot
-
 
 
 exit 0;

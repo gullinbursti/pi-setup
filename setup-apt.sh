@@ -6,26 +6,26 @@ sleep_dr() { sleep `printf "%d.%02d" $(( (RANDOM % 1) + 0 )) $(( RANDOM % 100 ))
 
 
 apt_src() {
-	local deb_file=/etc/apt/sources.list
-	local rpi_file=/etc/apt/sources.list.d/raspi.list
+    local deb_file=/etc/apt/sources.list
+    local rpi_file=/etc/apt/sources.list.d/raspi.list
 
-	printf "Backing up prev src lists..."
-	if [ $dry_run == true ]; then sleep_dr
-	else
-		[ -f "$deb_file" ] && sudo cp $deb_file $deb_file.bak
-		[ -f "$rpi_file" ] && sudo cp $rpi_file $rpi_file.bak
-	fi
-	echo
+    printf "Backing up prev src lists..."
+    if [ $dry_run == true ]; then sleep_dr
+    else
+        [ -f "$deb_file" ] && sudo cp $deb_file $deb_file.bak
+        [ -f "$rpi_file" ] && sudo cp $rpi_file $rpi_file.bak
+    fi
+    echo
 
-	printf "Uncommenting deb-src..."
-	if [ $dry_run == true ]; then sleep_dr
-	else
-		sudo sed -Ei 's/# Uncomment/\n# Uncomment/g' $deb_file
-		sudo sed -Ei 's/#deb-src/deb-src/g' $deb_file
-		sudo sed -Ei 's/# Uncomment/\n# Uncomment/g' $rpi_file
-		sudo sed -Ei 's/#deb-src/deb-src/g' $rpi_file
-	fi
-	echo ; echo
+    printf "Uncommenting deb-src..."
+    if [ $dry_run == true ]; then sleep_dr
+    else
+        sudo sed -Ei 's/# Uncomment/\n# Uncomment/g' $deb_file
+        sudo sed -Ei 's/#deb-src/deb-src/g' $deb_file
+        sudo sed -Ei 's/# Uncomment/\n# Uncomment/g' $rpi_file
+        sudo sed -Ei 's/#deb-src/deb-src/g' $rpi_file
+    fi
+    echo ; echo
 }
 
 
