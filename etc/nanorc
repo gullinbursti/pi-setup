@@ -14,14 +14,17 @@ set smooth
 set tabsize 4
 set tabstospaces
 
+
 #-- colors
 set titlecolor brightyellow,magenta
-set statuscolor brightwhite
+set statuscolor brightblack
 set errorcolor brightwhite,red
-set selectedcolor brightwhite,cyan
+set selectedcolor black,cyan
+#set stripecolor brightblack
 set numbercolor brightblack
-set keycolor brightyellow
+set keycolor brightwhite
 set functioncolor green
+
 
 #-- syntax
 include "/usr/share/nano/*.nanorc"
