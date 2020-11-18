@@ -28,6 +28,15 @@ bash_sys() {
 }
 
 
+home_dir() {
+    local bin_dir=/home/pi/.local/bin
+
+    #-- create a ~/.local/bin & apply ownership
+    [[ ! -d "$bin_dir" ]] && mkdir -p $bin_dir
+    chown pi:pi $bin_dir
+}
+
+
 nano_home() {
     local rc_file=/home/pi/.nanorc
     local rc_dir=/home/pi/.nano
@@ -75,6 +84,7 @@ nano_sys
 echo
 
 printf "Modifying %s files..." "/home/pi"
+home_dir
 bash_home
 nano_home
 tmux
