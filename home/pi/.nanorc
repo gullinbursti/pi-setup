@@ -4,11 +4,16 @@ set titlecolor brightwhite,blue
 set statuscolor white
 set errorcolor brightred
 set selectedcolor black,cyan
-#set stripecolor brightblack
 set numbercolor brightblack,black
 set keycolor brightcyan,blue
+set functioncolor brightyellow
 set functioncolor yellow
 
 
 #-- add syntax styles
 include ~/.nano/*.nanorc
+
+
+#-- override indents for py & make files
+extendsyntax python tabgives "    "
+extendsyntax makefile tabgives "    "

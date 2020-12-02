@@ -1,5 +1,6 @@
 
 #-- opts
+set afterends
 set autoindent
 set backup
 set backupdir "/usr/local/var/nano/backups"
@@ -20,11 +21,15 @@ set titlecolor brightyellow,magenta
 set statuscolor brightblack
 set errorcolor brightwhite,red
 set selectedcolor black,cyan
-#set stripecolor brightblack
 set numbercolor brightblack
-set keycolor brightwhite
+set keycolor yellow
 set functioncolor green
 
 
 #-- syntax
 include "/usr/share/nano/*.nanorc"
+
+
+#-- override indents for py & make files
+extendsyntax python tabgives "    "
+extendsyntax makefile tabgives "    "
