@@ -2,7 +2,7 @@
 #-- turn on NumLock for all terminals
 INITTY=/dev/tty[1-8]
 for tty in $INITTY; do
-    setleds -D _num < $tty
+    setleds -D +num < $tty
 done
 
 
