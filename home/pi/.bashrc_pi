@@ -110,6 +110,7 @@ alias ls='ls --color=auto'
 #-- other overrides
 alias bc='bc -l'
 alias cp='cp -p'
+alias df='df --print-type'
 alias mkdir='mkdir -pv'
 alias netstat='netstat -tulanp '
 alias ping='ping -c3'
