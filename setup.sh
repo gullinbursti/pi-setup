@@ -1,17 +1,8 @@
 #!/bin/bash
 
 
-#-- envs
-#export LESS=-XRf
-
-
-#-- aliases
-#alias apt='sudo apt'
-#alias ll='ls -pla'
-
-
 #-- install gawk first
-sudo apt update && sudo apt install gawk -y
+apt update && apt install gawk -y
 
 
 
