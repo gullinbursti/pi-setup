@@ -19,7 +19,7 @@ boot_rpdist() {
 
 
 etc_rpdist() {
-    local apt1_file=/etc/apt/sources.list
+#    local apt1_file=/etc/apt/sources.list
 #    local apt2_file=/etc/apt/sources.list.d/raspi.list
     local console_file=/etc/default/console-setup
     local bash_file=/etc/bash.bashrc
@@ -32,7 +32,7 @@ etc_rpdist() {
         [[ -f "$console_file" && ! -f "${console_file}.rp-dist" ]] && sudo cp $console_file $console_file.rp-dist
         [[ -f "$bash_file" && ! -f "${bash_file}.rp-dist" ]] && sudo cp $bash_file $bash_file.rp-dist
         [[ -f "$nano_file" && ! -f "${nano_file}.rp-dist" ]] && sudo cp $nano_file $nano_file.rp-dist
-        [[ -f "$apt1_file" && ! -f "${apt1_file}.rp-dist" ]] && sudo cp $apt1_file $apt1_file.rp-dist
+#        [[ -f "$apt1_file" && ! -f "${apt1_file}.rp-dist" ]] && sudo cp $apt1_file $apt1_file.rp-dist
 #        [[ -f "$apt2_file" && ! -f "${apt2_file}.rp-dist" ]] && sudo cp $apt2_file $apt2_file.rp-dist
     fi
 }
