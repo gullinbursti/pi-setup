@@ -28,8 +28,3 @@ set functioncolor green
 
 #-- syntax
 include "/usr/share/nano/*.nanorc"
-
-
-#-- override indents for py & make files
-extendsyntax python tabgives "    "
-extendsyntax makefile tabgives "    "
