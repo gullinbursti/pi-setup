@@ -42,7 +42,7 @@ etc_rpdist() {
 home_rpdist() {
     local home_dir=/home/pi
     local prof_file=$home_dir/.profile
-    local bashrc_file=$home_dir/.bash_rc
+    local bashrc_file=$home_dir/.bashrc
 
     printf "Backing up original %s files..." $home_dir
     if [ $dry_run == true ]; then sleep_dr
