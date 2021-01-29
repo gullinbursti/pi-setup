@@ -28,6 +28,19 @@ bash_sys() {
 }
 
 
+git_repos() {
+    local repo_dir=/home/pi/.local/git
+
+    [[ ! -d "$repo_dir" ]] && mkdir -p $repo_dir
+
+    printf "\nCloning billw2/rpi-clone..."
+    git clone https://github.com/billw2/rpi-clone.git $repo_dir/billw2
+    sudo ln -s %repo_dir/billw2/rpi-clone/rpi-clone /usr/local/bin
+    sudo ln -s %repo_dir/billw2/rpi-clone/rpi-clone-setup /usr/local/bin
+    echo
+}
+
+
 home_dir() {
     local bin_dir=/home/pi/.local/bin
 
@@ -90,7 +103,9 @@ nano_home
 tmux
 echo
 
-
+printf "Getting add'l software from github..."
+git_repos
+echo
 
 read -n 1 -s -r -p "Completed system + home cfg setup! Press any key to reboot..." && clear
 sudo reboot
