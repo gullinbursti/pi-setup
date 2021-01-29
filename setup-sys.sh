@@ -5,13 +5,13 @@
 
 boot_config() {
     local conf_file=/boot/config.txt
-    local cmd_file=/boot/cmd.txt
+    local cmd_file=/boot/cmdline.txt
 
     [ -f "$conf_file" ] && sudo cp $conf_file $conf_file.bak
     [ -f "$cmd_file" ] && sudo cp $conf_file $cmd_file.bak
 
     sudo cp ./boot/config.txt $conf_file
-    sudo cp /boot/cmdline.txt $cmd_file
+    sudo cp ./boot/cmdline.txt $cmd_file
 }
 
 
