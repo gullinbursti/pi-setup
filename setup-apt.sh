@@ -7,14 +7,11 @@ sleep_dr() { sleep `printf "%d.%02d" $(( (RANDOM % 1) + 0 )) $(( RANDOM % 100 ))
 
 apt_src() {
     local deb_file=/etc/apt/sources.list.d/deb-src.list
-#    local deb_file=/etc/apt/sources.list
-#    local rpi_file=/etc/apt/sources.list.d/raspi.list
 
     printf "Backing up prev src lists..."
     if [ $dry_run == true ]; then sleep_dr
     else
         [ -f "$deb_file" ] && sudo cp $deb_file $deb_file.bak
-#        [ -f "$rpi_file" ] && sudo cp $rpi_file $rpi_file.bak
     fi
     echo
 
@@ -22,14 +19,6 @@ apt_src() {
     sudo printf "\n\n#-- appended by pi-setup\n" >> $deb_file
     sudo cat etc/apt/sources.list.d/deb-src.list >> $deb_file
 
-#    printf "Uncommenting deb-src..."
-#    if [ $dry_run == true ]; then sleep_dr
-#    else
-#        sudo sed -Ei 's/# Uncomment/\n# Uncomment/g' $deb_file
-#        sudo sed -Ei 's/#deb-src/deb-src/g' $deb_file
-#        sudo sed -Ei 's/# Uncomment/\n# Uncomment/g' $rpi_file
-#        sudo sed -Ei 's/#deb-src/deb-src/g' $rpi_file
-#    fi
     echo ; echo
 }
 
@@ -40,7 +29,7 @@ apt_upg() {
     else
         sudo apt update ; echo
         printf "Upgrading installed pkgs...\n"
-#        sudo apt upgrade -y
+        sudo apt upgrade -y
     fi
     echo
 }
@@ -48,10 +37,6 @@ apt_upg() {
 
 apt_inst() {
     local pkgs="bc exfat-utils gawk git hfsutils jq pv source-highlight sysbench tmux wget"
-#    local pkgs_ins=$(apt list 2> /dev/null | grep installed)
-
-#    echo "Org List:\n[=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=]\n" ; echo ${pkgs} ; echo
-#    echo $pkgs | awk 'BEGIN {RS=" "} ; {print length($0),$0}' | gawk 'BEGIN {max=0 ; tot=0} ; {if($1 > max) max=$1 ; arr[tot]=$2 ; tot=tot+1} ; END {for(i=0; i<tot-1; i++) printf "[%*s]\n",(max),arr[i]}' | tr ' ' '.' | sed -E 's/([a-z\-]+)/ \1 /g' ; echo
 
     if [ $dry_run == true ]; then sleep_dr
     else
@@ -77,16 +62,16 @@ dry_run=false
 
 clear
 printf "Adding deb-src packages...\n"
-#apt_src ; echo
+apt_src ; echo
 
 printf "Updating & upgrading...\n"
-#apt_upg ; echo
+apt_upg ; echo
 
 printf "Prepping preliminary packages for install...\n"
 apt_inst ; echo
 
 printf "Auto removing + auto clean up...\n"
-#apt_cleanup ; echo
+apt_cleanup ; echo
 
 
 read -n 1 -s -r -p "Completed apt setup + updates! Press any key to reboot..." && clear
