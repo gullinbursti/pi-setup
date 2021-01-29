@@ -12,8 +12,3 @@ set functioncolor yellow
 
 #-- add syntax styles
 include ~/.nano/*.nanorc
-
-
-#-- override indents for py & make files
-extendsyntax python tabgives "    "
-extendsyntax makefile tabgives "    "
