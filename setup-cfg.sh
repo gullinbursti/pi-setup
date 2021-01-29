@@ -13,7 +13,7 @@ bash_home() {
 
     #-- backup & append .profile
     if [ -f "$profile_file" ]; then cp -p $profile_file $profile_file.bak ; fi
-    sudo printf "\n\n#-- appended by pi-setup\n" >> $rc_file
+    sudo printf "\n\n#-- appended by pi-setup\n" >> $profile_file
     cat ./home/pi/.profile >> $profile_file
 }
 
