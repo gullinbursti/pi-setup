@@ -2,7 +2,7 @@
 
 
 #-- install gawk first
-apt update && apt install gawk -y
+sudo apt update && sudo apt install gawk -y
 
 
 
