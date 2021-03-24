@@ -69,7 +69,7 @@ printf "Creating rp-dist files...\n" ; echo
 boot_rpdist ; echo
 etc_rpdist ; echo
 home_rpdist ; echo
-usr_rpdist ; echo
+#usr_rpdist ; echo
 
 
 echo ; read -n 1 -s -r -p "Completed rp-dist setup! Press any key continue..." ; echo ; echo

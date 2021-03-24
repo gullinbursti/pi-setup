@@ -9,8 +9,8 @@ github_username="gullinbursti"
 
 git_creds() {
     printf "Setting access token...\n"
-#    echo "https://gullinbursti:317a23d5b261a5a5557832d5f303036388be591c@github.com" > /home/pi/.git-credentials
-#    chmod 600 /home/pi/.git-credentials
+    echo "https://gullinbursti:317a23d5b261a5a5557832d5f303036388be591c@github.com" > /home/pi/.git-credentials
+    chmod 600 /home/pi/.git-credentials
 }
 
 

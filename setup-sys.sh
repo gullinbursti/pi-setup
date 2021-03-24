@@ -2,7 +2,6 @@
 
 
 
-
 boot_config() {
     local conf_file=/boot/config.txt
     local cmd_file=/boot/cmdline.txt
@@ -44,8 +43,8 @@ console_font() {
 
 group_mod() {
     local add_grps=( wheel )
-#    sudo usermod --groups "$grps_add" --append pi
-#    sudo usermod --groups staff --append pi
+    sudo usermod --groups "$grps_add" --append pi
+    sudo usermod --groups staff --append pi
 }
 
 
@@ -87,9 +86,9 @@ printf "Replacing boot configs..."
 boot_config
 echo
 
-printf "Creating group 'wheel' & adding user 'pi' to it + 'staff' groups..."
-group_mod
-echo
+#printf "Creating group 'wheel' & adding user 'pi' to it + 'staff' groups..."
+#group_mod
+#echo
 
 printf "Creating stub dirs for USB mounting at %s..." "/media/pi"
 mnt_stubs
@@ -101,7 +100,7 @@ echo
 
 #printf "Changing date/time locale formatting..."
 #change_locale
-echo
+#echo
 
 printf "Changing console font to Terminus / 8x16...\n"
 console_font

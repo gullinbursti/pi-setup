@@ -18,7 +18,6 @@ apt_src() {
     printf "Adding deb-src.list to sources.list.d..."
     sudo printf "\n\n#-- appended by pi-setup\n" >> $deb_file
     sudo cat etc/apt/sources.list.d/deb-src.list >> $deb_file
-
     echo ; echo
 }
 
