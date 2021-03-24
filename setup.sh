@@ -1,9 +1,10 @@
 #!/bin/bash
 
 
+alias ll='ls -plA'
+
 #-- install gawk first
 sudo apt update && sudo apt install gawk -y
-
 
 
 sudo ./setup-rpdist.sh
