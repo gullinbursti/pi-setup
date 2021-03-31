@@ -35,7 +35,7 @@ apt_upg() {
 
 
 apt_inst() {
-    local pkgs="bc cifs-utils exfat-utils ftp-upload gawk git hfsutils jq pv samba samba-common-bin smbclient source-highlight sysbench tmux wget samba-common-bin smbclient"
+    local pkgs="bc cifs-utils exfat-utils ftp-upload gawk git hfsplus hfsprogs hfsutils jq pv samba samba-common-bin smbclient source-highlight sysbench tmux wget samba-common-bin smbclient"
 
     if [ $dry_run == true ]; then sleep_dr
     else
