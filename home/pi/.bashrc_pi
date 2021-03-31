@@ -137,6 +137,7 @@ alias weather='curl https://wttr.in --silent | head -7 ; echo'
 
 #-- type-o fixes
 alias exiy='exit'
+alias snao='snano'
 alias please='sudo $(history -p !!)'
 # //~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~/'
 
