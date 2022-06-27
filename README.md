@@ -9,4 +9,4 @@ Items include:
  - Changing startup
  - Custom boot config
  - git config
- 
+ - usb mounting stubs
